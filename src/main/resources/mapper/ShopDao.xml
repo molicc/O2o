@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.o2o.dao.ShopDao">
+    <resultMap id="shopMap" type="Shop">
+        <id column="shop_id" property="shopId"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="shop_desc" property="shopDesc"/>
+        <result column="shop_addr" property="shopAddr"/>
+        <result column="phone" property="phone"/>
+        <result column="shop_img" property="shopImg"/>
+        <result column="priority" property="priority"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_edit_time" property="lastEditTime"/>
+        <result column="enable_status" property="enableStatus"/>
+        <result column="advice" property="advice"/>
+        <association property="area" column="area_id" javaType="Area">
+            <id column="area_id" property="areaId"/>
+            <result column="area_name" property="areaName"/>
+        </association>
+        <association property="shopCategory" column="shop_category_id" javaType="ShopCategory">
+            <id column="shop_category_id" property="shopCategoryId"/>
+            <result column="shop_category_name" property="shopCategoryName"/>
+        </association>
+        <association property="owner" column="user_id" javaType="PersonInfo">
+            <id column="user_id" property="userId"/>
+            <result column="name" property="name"/>
+        </association>
+    </resultMap>
+    <insert id="insertShop" useGeneratedKeys="true" keyColumn="shop_id" keyProperty="shopId" parameterType="Shop">
+        insert into
+        tb_shop(owner_id, area_id, shop_category_id, shop_name, shop_desc, shop_addr, phone, shop_img, priority, create_time,
+        last_edit_time, enable_status, advice)
+        values
+        (#{owner.userId},#{area.areaId},#{shopCategory.shopCategoryId},#{shopName},#{shopDesc},#{shopAddr},#{phone},
+        #{shopImg},#{priority},#{createTime},#{lastEditTime},#{enableStatus},#{advice})
+    </insert>
+    <update id="updateShop" parameterType="Shop">
+        update tb_shop
+        <set>
+            <if test="shopName!=null">shop_name=#{shopName},</if>
+            <if test="shopDesc!=null">shop_desc=#{shopDesc},</if>
+            <if test="shopAddr!=null">shop_addr=#{shopAddr},</if>
+            <if test="phone!=null">phone=#{phone},</if>
+            <if test="shopImg!=null">shop_img=#{shopImg},</if>
+            <if test="priority!=null">priority=#{priority},</if>
+            <if test="lastEditTime!=null">last_edit_time=#{lastEditTime},</if>
+            <if test="enableStatus!=null">enable_status=#{enableStatus},</if>
+            <if test="advice!=null">advice=#{advice},</if>
+            <if test="shopCategory!=null">shop_category_id=#{shopCategory.shopCategoryId},</if>
+            <if test="area!=null">area_id=#{area.areaId}</if>
+        </set>
+        where shop_id=#{shopId}
+    </update>
+    <select id="queryByShopId" resultMap="shopMap" parameterType="long">
+        SELECT
+        tb_shop.shop_id,
+        tb_shop.owner_id,
+        tb_shop.area_id,
+        tb_shop.shop_category_id,
+        tb_shop.shop_name,
+        tb_shop.shop_desc,
+        tb_shop.shop_addr,
+        tb_shop.phone,
+        tb_shop.shop_img,
+        tb_shop.priority,
+        tb_shop.create_time,
+        tb_shop.last_edit_time,
+        tb_shop.enable_status,
+        tb_shop.advice,
+        tb_shop_category.shop_category_name,
+        tb_shop_category.shop_category_id,
+        tb_area.area_name,
+        tb_area.area_id
+        FROM
+        tb_shop
+        , tb_shop_category
+        , tb_area
+        WHERE
+        tb_shop.shop_category_id = tb_shop_category.shop_category_id AND
+        tb_shop.area_id = tb_area.area_id and shop_id=#{shopId}
+
+    </select>
+    <select id="queryShopList" resultMap="shopMap">
+        SELECT
+        tb_shop.shop_id,
+        tb_shop.owner_id,
+        tb_shop.area_id,
+        tb_shop.shop_category_id,
+        tb_shop.shop_name,
+        tb_shop.shop_desc,
+        tb_shop.shop_addr,
+        tb_shop.phone,
+        tb_shop.shop_img,
+        tb_shop.priority,
+        tb_shop.create_time,
+        tb_shop.last_edit_time,
+        tb_shop.enable_status,
+        tb_shop.advice,
+        tb_shop_category.shop_category_name,
+        tb_shop_category.shop_category_id,
+        tb_area.area_name,
+        tb_area.area_id
+        FROM
+        tb_shop
+        , tb_shop_category
+        , tb_area
+        <where>
+            <if test="shop.shopCategory!=null and shop.shopCategory.shopCategoryId!=null">
+                and tb_shop.shop_category_id =#{shop.shopCategory.shopCategoryId}
+            </if>
+            <if
+                    test="shop.shopCategory!=null and shop.shopCategory.parent!=null and shop.shopCategory.parent.shopCategoryId!=null">
+                and tb_shop.shop_category_id in(select shop_category_id from tb_shop_category where parent_id
+                =#{shop.shopCategory.parent.shopCategoryId})
+            </if>
+            <if test="shop.area!=null and shop.area.areaId!=null">
+                and tb_shop.area_id =#{shop.area.areaId}
+            </if>
+            <if test="shop.shopName!=null">
+                <!--此处要用${},因为#{}起占位作用，在''中，#{}不起作用-->
+                and tb_shop.shop_name like '%${shop.shopName}%'
+            </if>
+            <if test="shop.enableStatus!=null">
+                and tb_shop.enable_status=#{shop.enableStatus}
+            </if>
+            <if test="shop.owner!=null and shop.owner.userId!=null">
+                and tb_shop.owner_id=#{shop.owner.userId}
+            </if>
+        </where>
+        and
+        tb_shop.area_id=tb_area.area_id
+        and
+        tb_shop.shop_category_id=tb_shop_category.shop_category_id
+        order by
+        priority desc
+        limit #{rowIndex},#{pageSize}
+    </select>
+    <select id="queryShopCount" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        tb_shop
+        , tb_shop_category
+        , tb_area
+        <where>
+            <if test="shop.shopCategory!=null and shop.shopCategory.shopCategoryId!=null">
+                and tb_shop.shop_category_id =#{shop.shopCategory.shopCategoryId}
+            </if>
+            <if test="shop.area!=null and shop.area.areaId!=null">
+                and tb_shop.area_id =#{shop.area.areaId}
+            </if>
+            <if test="shop.shopName!=null">
+                and tb_shop.shop_name like '%${shop.shopName}%'
+            </if>
+            <if test="shop.enableStatus!=null">
+                and tb_shop.enable_status=#{shop.enableStatus}
+            </if>
+            <if test="shop.owner!=null and shop.owner.userId!=null">
+                and tb_shop.owner_id=#{shop.owner.userId}
+            </if>
+        </where>
+        and
+        tb_shop.area_id=tb_area.area_id
+        and
+        tb_shop.shop_category_id=tb_shop_category.shop_category_id
+    </select>
+</mapper>

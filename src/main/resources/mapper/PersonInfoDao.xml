@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.o2o.dao.PersonInfoDao">
+
+    <insert id="insertPersonInfo" useGeneratedKeys="true" keyProperty="userId">
+        insert into tb_person_info(name,profile_img, email, gender,user_type,enable_status, create_time,
+        last_edit_time)
+        values (#{name},#{profileImg},#{email},#{gender},#{userType},#{enableStatus},#{createTime},#{lastEditTime} )
+    </insert>
+</mapper>

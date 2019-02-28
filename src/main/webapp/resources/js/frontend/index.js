@@ -43,7 +43,7 @@ $(function () {
     $("#me").click(function () {
         $.openPanel("#panel-right-demo");
     })
-    $(".row").on("click","shop-classify",function (e) {
+    $(".row").on("click",".shop-classify",function (e) {
         var shopCategoryId =e.currentTarget.dataset.category;
         var newUrl ="/frontend/shoplist?parentId="+shopCategoryId
         window.location.href=newUrl

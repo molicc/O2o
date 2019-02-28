@@ -9,4 +9,17 @@
         last_edit_time)
         values (#{name},#{profileImg},#{email},#{gender},#{userType},#{enableStatus},#{createTime},#{lastEditTime} )
     </insert>
+    <update id="updatePersonInfo">
+        update tb_person_info
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="profileImg!=null">profile_img=#{profileImg},</if>
+            <if test="email!=null">email=#{email},</if>
+            <if test="gender!=null">gender=#{gender},</if>
+            <if test="userType!=null">user_type=#{userType},</if>
+            <if test="enableStatus!=null">enable_status=#{enableStatus},</if>
+            <if test="lastEditTime!=null">last_edit_time=#{lastEditTime}</if>
+        </set>
+        where user_id=#{userId}
+    </update>
 </mapper>

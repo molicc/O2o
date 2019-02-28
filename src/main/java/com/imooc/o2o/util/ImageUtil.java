@@ -6,6 +6,7 @@ package com.imooc.o2o.util;
  */
 
 import com.imooc.o2o.dto.ImageHolder;
+import com.imooc.o2o.enums.ImageCategoryEnum;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 
@@ -29,12 +30,13 @@ public class ImageUtil {
 
     /**
      * 保存处理后的图片
-     * @param thumbnail 原始图片
+     * @param imageHolder 原始图片
      * @param targetAddr 目标地址
      * @return
      */
-    public static String generateThumbnail(ImageHolder imageHolder, String targetAddr) {
-        InputStream thumbnail =imageHolder.getImage();
+    public static String generateImage(ImageHolder imageHolder, String targetAddr,
+                                       ImageCategoryEnum imageCategoryEnum) {
+        InputStream image = imageHolder.getImage();
         String fileName =imageHolder.getImageName();
         //随机生成图片名
         String realFileName = getRandomFileName();
@@ -43,19 +45,42 @@ public class ImageUtil {
         //生成绝对路径下的各个子级文件目录
         makeDirPath(targetAddr);
 
-        //相对地址
+        //相对地址+随机文件名+后缀
         String relativeAddr = targetAddr + realFileName + extension;
-        //绝对地址
+        //根据图片绝对路径生成图片
         File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
 
-
-        try {
-            Thumbnails.of(thumbnail).size(200, 200).watermark(Positions.BOTTOM_RIGHT,
-                    ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\pictures\\waterMark.jpg")), 0.25f).outputQuality(0.8f)
-                    .toFile(dest);
-        } catch (IOException e) {
-            e.printStackTrace();
+        switch (imageCategoryEnum.getState()) {
+            case 0:
+                try {
+                    //添加水印后的图片对原图片进行覆盖
+                    Thumbnails.of(image).size(337, 640).watermark(Positions.BOTTOM_RIGHT,
+                            ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\pictures\\waterMark.jpg")),
+                            0.25f).outputQuality(0.8f)
+                            .toFile(dest);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 1:
+                try {
+                    Thumbnails.of(image).size(200, 200).watermark(Positions.BOTTOM_RIGHT,
+                            ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\pictures\\waterMark.jpg")),
+                            0.25f).outputQuality(0.9f)
+                            .toFile(dest);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 2:
+                try {
+                    Thumbnails.of(image).size(300, 300).outputQuality(0.9f).toFile(dest);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
+
         return relativeAddr;
     }
 
@@ -85,6 +110,7 @@ public class ImageUtil {
     }
 
     /**
+     * 根据相对路径删除已存在的文件和文件夹
      * @param storePath 文件的路径或是目录的路径
      */
     public static void deleteFileOrPath(String storePath){
@@ -100,31 +126,5 @@ public class ImageUtil {
             //如果是文件，删除文件；是最后一个文件夹则删除文件夹
             fileOrPath.delete();
         }
-    }
-
-    public static String generateNormalImg(ImageHolder imageHolder, String targetAddr) {
-        InputStream thumbnail =imageHolder.getImage();
-        String fileName =imageHolder.getImageName();
-        //随机生成图片名
-        String realFileName = getRandomFileName();
-        //获取图片格式后缀名
-        String extension = fileName.substring(fileName.lastIndexOf("."));
-        //生成绝对路径下的各个子级文件目录
-        makeDirPath(targetAddr);
-
-        //相对地址
-        String relativeAddr = targetAddr + realFileName + extension;
-        //绝对地址
-        File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
-
-
-        try {
-            Thumbnails.of(thumbnail).size(337, 640).watermark(Positions.BOTTOM_RIGHT,
-                    ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\pictures\\waterMark.jpg")), 0.25f).outputQuality(0.9f)
-                    .toFile(dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return relativeAddr;
     }
 }

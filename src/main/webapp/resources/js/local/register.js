@@ -17,14 +17,14 @@ $("#register").click(function () {
         }
     ).data("text");
     personInfo.email = $("#email").val();
-    personInfo.userImg = $("#user-img")[0].files;
+    userImg = $("#user-img")[0].files[0];
     localAuth.personInfo = personInfo;
     var verifyCodeActual = $("#j_captcha").val();
     var formData = new FormData();
     formData.append("localAuth", JSON.stringify(localAuth));
 
     formData.append("verifyCodeActual", verifyCodeActual);
-
+    formData.append("userImg", userImg);
     if (!checkflag) {
         $.toast("两次密码输入不一致");
     } else {

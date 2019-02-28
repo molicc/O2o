@@ -43,20 +43,20 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
         List<ShopCategory> shopCategoryList;
         ObjectMapper mapper = new ObjectMapper();
         if (shopCategoryCondition ==null){
-            //若查询条件为空，则列出所有首页大类，即parentId为空的店铺类别
+            //若查询条件为空，则列出所有一级类别，即parentId为空的店铺类别
             key=key+"_allfirstlevel";
         }else if (shopCategoryCondition !=null&& shopCategoryCondition.getParent()!=null&& shopCategoryCondition.getParent().getShopCategoryId()!=null){
-            //若parentId为菲康，则列出改parentId下所有的子类
+            //若parentId为非空，则列出该parentId下所有的二级类别
             key=key+"_parent"+ shopCategoryCondition.getParent().getShopCategoryId();
         }else if (shopCategoryCondition!=null){
-            //列出所有子类别
+            //列出所有二级类别
             key=key+"_allsecondlevel";
         }
         String jsonString;
         if (!jedisUtilKeys.exists(key)){
             shopCategoryList = shopCategoryDao.queryShopCategory(shopCategoryCondition);
             try {
-                jsonString=mapper.writeValueAsString(shopCategoryList);
+                mapper.writeValueAsString(shopCategoryList);
             }catch (Exception e){
                 e.printStackTrace();
                 logger.error(e.getMessage());

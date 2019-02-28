@@ -40,13 +40,9 @@ public class ProductCategoryManagementController {
     @RequestMapping(value = "/getproductcategorylist", method = RequestMethod.GET)
     @ResponseBody
     private Result<List<ProductCategory>> getProductCategoryList(HttpServletRequest request) {
-        //todo delete to use session
-        Shop shop = new Shop();
-        shop.setShopId(1L);
-        request.getSession().setAttribute("currentShop", shop);
 
         Shop currentShop = (Shop) request.getSession().getAttribute("currentShop");
-        List<ProductCategory> list = null;
+        List<ProductCategory> list;
         if (currentShop != null && currentShop.getShopId() > 0) {
             list =
                     productCategoryService.getProductCategoryList(currentShop.getShopId());
@@ -93,7 +89,7 @@ public class ProductCategoryManagementController {
 
     @RequestMapping(value = "/removeproductcategory", method = RequestMethod.POST)
     @ResponseBody
-    //想直接将数据当做参数哦获取，需要前台当做json独立发送
+    //想直接将数据当做参数获取，需要前台当做json独立发送
     private Map<String, Object> removeProductCategory(Long productCategoryId, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
         if (productCategoryId != null && productCategoryId > 0) {
@@ -109,7 +105,7 @@ public class ProductCategoryManagementController {
                     modelMap.put("errMsg",productCategoryExecution.getStateInfo());
                 }
             }catch (Exception e){
-                modelMap.put("success",true);
+                modelMap.put("success", false);
                 modelMap.put("errMsg",e.getMessage());
             }
         } else {

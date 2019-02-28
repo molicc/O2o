@@ -24,7 +24,7 @@
                 and parent_id is not null
                 <!--传入带parentId的参数，查询其父目录-->
                 <if test="shopCategoryCondition.parent !=null and shopCategoryCondition.parent.shopCategoryId !=null">
-                    and parent_id =#{shopCategoryCondition.parent.shopCategoryId}
+                    and shop_category_id =#{shopCategoryCondition.parent.shopCategoryId}
                 </if>
             </if>
         </where>

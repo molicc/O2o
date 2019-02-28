@@ -14,6 +14,12 @@ package com.imooc.o2o.util;
  **/
 public class PathUtil {
     private static String seperator = System.getProperty("file.separator");
+
+    /**
+     * 根据不同操作系统获取不同的文件存放路径
+     *
+     * @return
+     */
     public static String getImgBasePath(){
         String os =System.getProperty("os.name");
         String basePath="";
@@ -26,8 +32,24 @@ public class PathUtil {
         return basePath;
     }
 
+    /**
+     * 根据shopId生成不同商铺图片存放的专属文件夹的相对路径
+     * @param shopId
+     * @return
+     */
     public static String getShopImgPath(Long shopId){
         String imgPath="/upload/item/shop"+shopId+"/";
         return imgPath.replace("/",seperator);
+    }
+
+    /**
+     * 根据userId生成不同的用户图片存放专属文件夹的相对路径
+     *
+     * @param userId
+     * @return
+     */
+    public static String getUserImgPath(Long userId) {
+        String userPath = "/upload/user/user" + userId + "/";
+        return userPath.replace("/", seperator);
     }
 }

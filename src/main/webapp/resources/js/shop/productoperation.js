@@ -1,4 +1,4 @@
- $(function () {
+$(function () {
     var productId = getQueryString("productId")
     var infoUrl = "/shopadmin/getproductbyid?productId=";
     var categoryUrl = "/shopadmin/getproductcategorylist"
@@ -27,18 +27,34 @@
 
                 var optionHtml = "";
                 var optionArr = data.productCategoryList;
-                var optionSelected = product.productCategory.productCategoryId;
-
-                optionArr.map(function (value) {
-                    var isSeleted = optionSelected === value.productCategoryId ? "selected" : "";
-
-                    optionHtml +=
-                        '<option data-value ="' +
-                        value.productCategoryId +
-                        '" isSeleted>' +
-                        value.productCategoryName +
+                if (product.productCategory == null) {
+                    optionHtml += '<option data-value =null selected>' +
+                        "请选择" +
                         '</option>'
-                })
+                    optionArr.map(function (value) {
+
+                        optionHtml +=
+                            '<option data-value ="' +
+                            value.productCategoryId +
+                            '" isSeleted>' +
+                            value.productCategoryName +
+                            '</option>'
+                    })
+                }
+                else {
+                    var optionSelected = product.productCategory.productCategoryId;
+                    optionArr.map(function (value) {
+
+                        var isSeleted = optionSelected === value.productCategoryId ? "selected" : "";
+
+                        optionHtml +=
+                            '<option data-value ="' +
+                            value.productCategoryId +
+                            '" isSeleted>' +
+                            value.productCategoryName +
+                            '</option>'
+                    })
+                }
                 $("#category").html(optionHtml);
             }
         })
@@ -75,7 +91,7 @@
         product.productName = $("#product-name").val();
         product.productDesc = $("#product-desc").val();
         product.priority = $("#priority").val();
-        product.point=$("#point").val();
+        product.point = $("#point").val();
         product.normalPrice = $("#normal-price").val();
         product.promotionPrice = $("#promotion-price").val();
 
@@ -92,7 +108,7 @@
         var thumbnail = $("#small-img")[0].files[0];
         formData.append("thumbnail", thumbnail);
         $(".detail-img").map(
-            function (index,value) {
+            function (index, value) {
                 if ($(".detail-img")[index].files.length > 0) {
                     formData.append("productImg" + index, $(".detail-img")[index].files[0]);
                 }
@@ -100,23 +116,23 @@
         );
         formData.append("productStr", JSON.stringify(product));
         var verifyCodeActual = $("#j_kaptcha").val();
-        if (!verifyCodeActual){
+        if (!verifyCodeActual) {
             $.toast("请输入验证码")
             return;
         }
-        formData.append("verifyCodeActual",verifyCodeActual);
+        formData.append("verifyCodeActual", verifyCodeActual);
         $.ajax({
-            url:productPostUrl,
-            type:"POST",
-            data:formData,
-            contentType:false,
-            processData:false,
-            success:function (data) {
-                if (data.success){
+            url: productPostUrl,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.success) {
                     $.toast("提交成功")
                     window.history.go(-1);
-                }else {
-                    $.toast("提交失败,"+data.errMsg)
+                } else {
+                    $.toast("提交失败," + data.errMsg)
                 }
                 $("#kaptcha_img").click();
             }

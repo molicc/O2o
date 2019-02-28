@@ -16,4 +16,6 @@ import com.imooc.o2o.entity.PersonInfo;
  **/
 public interface PersonInfoDao {
       int insertPersonInfo(PersonInfo personInfo);
+
+      int updatePersonInfo(PersonInfo personInfo);
 }

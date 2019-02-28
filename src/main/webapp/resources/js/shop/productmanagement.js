@@ -1,8 +1,19 @@
 $(function () {
     var listUrl ="/shopadmin/getproductlistbyshop?pageIndex=1&pageSize=999"
     var statusUrl ="/shopadmin/modifyproduct"
+    var productCategoryUrl = '/shopadmin/getproductcategorylist';
     getList();
     function getList() {
+        $.getJSON(productCategoryUrl, function (data) {
+            if (data.success && data.data.length == 0) {
+
+                $.alert("请先维护商品类别", function () {
+
+                    window.location.href = "/shopadmin/productcategorymanage";
+                })
+
+            }
+        })
         $.getJSON(listUrl,function (data) {
             if (data.success){
                 var productList= data.productList

@@ -5,6 +5,7 @@ package com.imooc.o2o.service;
  * @author Administrator
  */
 
+import com.imooc.o2o.dto.ImageHolder;
 import com.imooc.o2o.dto.LocalAuthExecution;
 import com.imooc.o2o.entity.LocalAuth;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -68,6 +69,6 @@ public interface LocalAuthService {
      * @param localAuth
      * @return
      */
-    LocalAuthExecution insertNewUser(LocalAuth localAuth);
+    LocalAuthExecution insertNewUser(LocalAuth localAuth, ImageHolder imageHolder);
 
 }

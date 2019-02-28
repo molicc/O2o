@@ -6,6 +6,7 @@ package com.imooc.o2o.web.local;
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imooc.o2o.dto.ImageHolder;
 import com.imooc.o2o.dto.LocalAuthExecution;
 import com.imooc.o2o.entity.LocalAuth;
 import com.imooc.o2o.entity.PersonInfo;
@@ -18,6 +19,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -181,12 +186,14 @@ public class LocalAuthController {
     @RequestMapping(value = "/registerNew", method = RequestMethod.POST)
     private Map<String, Object> register(HttpServletRequest request) {
         HashMap<String, Object> modelMap = new HashMap<>();
+        //1、验证码校验
         boolean checkVerifyCode = CodeUtil.checkVerifyCode(request);
         if (!checkVerifyCode) {
             modelMap.put("success", false);
             modelMap.put("errMsg", "验证码错误");
             return modelMap;
         }
+        //2、获取localAuth对象
         String localStr = HttpServletRequestUtil.getString(request, "localAuth");
         ObjectMapper objectMapper = new ObjectMapper();
         LocalAuth localAuth;
@@ -197,7 +204,27 @@ public class LocalAuthController {
             modelMap.put("errMsg", e.getMessage());
             return modelMap;
         }
-        LocalAuthExecution localAuthExecution = localAuthService.insertNewUser(localAuth);
+        //3、获取用户头像
+        CommonsMultipartFile userImg = null;
+        ImageHolder imageHolder;
+        CommonsMultipartResolver commonsMultipartResolver =
+                new CommonsMultipartResolver(request.getSession().getServletContext());
+        if (commonsMultipartResolver.isMultipart(request)) {
+            MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+            userImg = (CommonsMultipartFile) multipartHttpServletRequest.getFile("userImg");
+        } else {
+
+        }
+        try {
+            imageHolder = new ImageHolder(userImg.getOriginalFilename(), userImg.getInputStream());
+        } catch (IOException e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+            return modelMap;
+        }
+
+        //处理业务
+        LocalAuthExecution localAuthExecution = localAuthService.insertNewUser(localAuth, imageHolder);
         if (localAuthExecution.getState() == LocalAuthStateEnum.SUCCESS.getState()) {
             modelMap.put("success", true);
         } else {

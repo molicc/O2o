@@ -190,13 +190,13 @@ public class ShopManagementController {
         ObjectMapper mapper = new ObjectMapper();
         Shop shop;
         try {
-            //使用jackson将json转为对象
             shop = mapper.readValue(shopStr, Shop.class);
         } catch (Exception e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());
             return modelMap;
         }
+
         //获取图片信息
         CommonsMultipartFile shopImg;
         CommonsMultipartResolver commonsMultipartResolver =

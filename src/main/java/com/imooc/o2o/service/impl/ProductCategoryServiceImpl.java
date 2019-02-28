@@ -49,7 +49,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                     return new ProductCategoryExecution(ProductCategoryStateEnum.SUCCESS);
                 }
             } catch (Exception e) {
-                throw new ProductCategoryOperationException("batchAddProductCategory errMsg" + e.getMessage());
+                throw new ProductCategoryOperationException("类别名称重复，请重新输入");
             }
         } else {
             return new ProductCategoryExecution(ProductCategoryStateEnum.EMPTY_LIST);
@@ -64,7 +64,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         try {
 
             int effectNum = productDao.updateProductCategoryToNull(productCategoryId);
-            if (effectNum <= 0) {
+            if (effectNum < 0) {
                 throw new RuntimeException("商品类别更新失败");
             }
         } catch (Exception e) {

@@ -11,13 +11,13 @@ import com.imooc.o2o.dto.ImageHolder;
 import com.imooc.o2o.dto.ProductExecution;
 import com.imooc.o2o.entity.Product;
 import com.imooc.o2o.entity.ProductImg;
+import com.imooc.o2o.enums.ImageCategoryEnum;
 import com.imooc.o2o.enums.ProductStateEnum;
 import com.imooc.o2o.exceptions.ProductOperationException;
 import com.imooc.o2o.service.ProductService;
 import com.imooc.o2o.util.ImageUtil;
 import com.imooc.o2o.util.PageCalculator;
 import com.imooc.o2o.util.PathUtil;
-import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -148,7 +148,7 @@ public class ProductServiceImpl implements ProductService {
 
         for (ImageHolder imageHolder:productImgHolderList
              ) {
-            String imgAddr = ImageUtil.generateNormalImg(imageHolder, dest);
+            String imgAddr = ImageUtil.generateImage(imageHolder, dest, ImageCategoryEnum.NORMAL_IMG);
 
             ProductImg productImg = new ProductImg();
             productImg.setImgAddr(imgAddr);
@@ -172,7 +172,7 @@ public class ProductServiceImpl implements ProductService {
 
     private void addThumbnail(Product product, ImageHolder thumbnail) {
         String dest = PathUtil.getShopImgPath(product.getShop().getShopId());
-        String thumbnailAddr = ImageUtil.generateThumbnail(thumbnail, dest);
+        String thumbnailAddr = ImageUtil.generateImage(thumbnail, dest, ImageCategoryEnum.THUMBNAIL_IMG);
         product.setImgAddr(thumbnailAddr);
     }
 

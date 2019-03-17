@@ -4,6 +4,8 @@
          version="3.1" metadata-complete="true">
 
     <display-name>Archetype Created Web Application</display-name>
+
+    <!--Google一个开源的验证码工具-->
     <servlet>
         <servlet-name>Kaptcha</servlet-name>
         <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
@@ -58,6 +60,7 @@
         <url-pattern>/Kaptcha</url-pattern>
     </servlet-mapping>
 
+    <!--整合spring-dao、sping-web、spring-redis、spring-service.xml-->
     <servlet>
         <servlet-name>spring-dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -71,6 +74,8 @@
         <!--默认匹配所有的请求-->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <!--起始登录页面-->
     <welcome-file-list>
         <welcome-file>/WEB-INF/html/local/login.html</welcome-file>
     </welcome-file-list>

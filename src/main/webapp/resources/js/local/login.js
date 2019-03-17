@@ -44,9 +44,11 @@ $(function () {
                     usertype=data.userType;
                     if (usertype==1){
                         //若用户在前端展示系统页面则自动连接到前端展示系统首页
-                        window.location.href="/frontend/index"
-                    }else {
-                        window.location.href="/shopadmin/shoplist"
+                        window.location.href="/frontend/index";
+                    }else if(usertype == 2){
+                        window.location.href="/shopadmin/shoplist";
+                    }else if(usertype == 3){
+                        window.location.href="/superadmin/head";
                     }
                 }else {
                     $.toast("登录失败！"+data.errMsg);
@@ -60,6 +62,6 @@ $(function () {
 
     })
     $("#register").click(function () {
-        location.href="/local/register";
+        window.location.href="/local/register";
     })
 })

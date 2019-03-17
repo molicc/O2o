@@ -56,12 +56,14 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
         if (!jedisUtilKeys.exists(key)){
             shopCategoryList = shopCategoryDao.queryShopCategory(shopCategoryCondition);
             try {
-                mapper.writeValueAsString(shopCategoryList);
+                jsonString = mapper.writeValueAsString(shopCategoryList);
             }catch (Exception e){
                 e.printStackTrace();
                 logger.error(e.getMessage());
                 throw new ShopcategoryOperationException(e.getMessage());
             }
+            //保存至redis
+            jedisUtilStrings.set(key, jsonString);
         }else {
             jsonString=jedisUtilStrings.get(key);
             JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, ShopCategory.class);
@@ -74,5 +76,6 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
             }
         }
         return shopCategoryList;
+
     }
 }

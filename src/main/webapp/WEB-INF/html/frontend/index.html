@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>首页</title>
+    <title>O2oSchool</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,14 +14,14 @@
     <link rel="stylesheet" href="/resources/css/frontend/index.css">
 </head>
 <body>
-<!-- page集合的容器，里面放多个平行的.page，其他.page作为内联页面由路由控制展示 -->
+<!-- page集合的容器,里面放多个平行的.page,其他.page作为内联页面由路由控制展示 -->
 <div class="page-group">
     <!-- 单个page ,第一个.page默认被展示-->
     <div class="page">
         <!-- 标题栏 -->
         <header class="bar bar-nav">
             <a class="icon icon-me pull-left open-panel"></a>
-            <h1 class="title">标题</h1>
+            <h1 class="title">欢迎来到O2oSchool平台</h1>
         </header>
 
         <!-- 工具栏 -->
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <!-- 其他的单个page内联页（如果有） -->
+    <!-- 其他的单个page内联页(如果有) -->
     <div class="page">...</div>
 </div>
 
@@ -74,25 +74,26 @@
             <a href="/local/changepsw" class="close-panel">修改密码</a>
         </p>
         <p>
-            <a href="/myo2o/frontend/myrecord" class="close-panel">消费记录</a>
+            <a href="#" class="close-panel">消费记录</a>
         </p>
         <p>
-            <a href="/myo2o/frontend/mypoint" class="close-panel">我的积分</a>
+            <a href="#" class="close-panel">我的积分</a>
         </p>
         <p>
-            <a href="/myo2o/frontend/pointrecord" class="close-panel">兑换记录</a>
+            <a href="#" class="close-panel">兑换记录</a>
         </p>
         <p>
-            <a href="#" usertype="1" class="close-panel" id="log-out">登出系统</a>
+            <a href="#" class="close-panel" id="log-out">登出系统</a>
         </p>
     </div>
 </div>
 
 
-<!-- 默认必须要执行$.init(),实际业务里一般不会在HTML文档里执行，通常是在业务页面代码的最后执行 -->
+<!-- 默认必须要执行$.init(),实际业务里一般不会在HTML文档里执行,通常是在业务页面代码的最后执行 -->
 <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
 <script type="text/javascript" src="/resources/js/frontend/index.js"></script>
 <script type="text/javascript" src="/resources/js/local/logout.js"></script>
 

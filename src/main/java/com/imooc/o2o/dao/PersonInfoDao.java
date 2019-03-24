@@ -15,7 +15,17 @@ import com.imooc.o2o.entity.PersonInfo;
  *@date 2019/2/27 17:08
  **/
 public interface PersonInfoDao {
+      /**
+       * 插入个人信息
+       * @param personInfo
+       * @return
+       */
       int insertPersonInfo(PersonInfo personInfo);
 
+      /**
+       * 更新个人信息
+       * @param personInfo
+       * @return
+       */
       int updatePersonInfo(PersonInfo personInfo);
 }

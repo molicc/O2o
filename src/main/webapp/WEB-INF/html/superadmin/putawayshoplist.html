@@ -11,38 +11,22 @@
 
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-    <link rel="stylesheet" href="/resources/css/shop/shoplist.css">
 
 </head>
 <body>
 <div class="page-group">
     <div class="page page-current">
         <header class="bar bar-nav">
-            <h1 class='title'>商店列表</h1>
+            <h1 class='title'>已上架的商铺</h1>
         </header>
         <div class="content">
             <div class="content-block">
-                <p>
-                    你好,<span id="user-name"></span>
-                    <a class="pull-right" href="javascript:location.href='/shopadmin/shopoperation'">增加店铺</a>
-                </p>
-                <div class="row row-shop">
-                    <div class="col-40">商店名称</div>
-                    <div class="col-40">状态</div>
-                    <div class="col-20">操作</div>
-                </div>
+                <!--列出所有商店信息,可以选择上架或者下架商店-->
                 <div class="shop-warp"></div>
             </div>
             <div class="row">
-                <div class="col-33">
-                    <a href="/local/accountbind?usertype=2"
-                       class="button button-big button-fill button-success">账号绑定</a>
-                </div>
-                <div class="col-33">
-                    <a href="" id="log-out" class="button button-big button-fill button-danger">退出系统</a>
-                </div>
-                <div class="col-33">
-                    <a href='/local/changepsw' id="" class="button button-big button-fill button-danger">修改密码</a>
+                <div class="col-50">
+                    <a href="/local/login" id="" class="button button-big button-fill button-danger">退出系统</a>
                 </div>
             </div>
         </div>
@@ -55,7 +39,6 @@
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
 
 <script type="text/javascript" src="/resources/js/common/common.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/resources/js/shop/shoplist.js"></script>
-<script type="text/javascript" src="/resources/js/local/logout.js"></script>
+
 </body>
 </html>

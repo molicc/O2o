@@ -21,8 +21,8 @@ import java.util.List;
 public interface ProductDao {
 
     /**
-     * 添加商品
-     * @param product
+     * 添加商品product
+     * @param product 插入的实体product
      * @return
      */
     int insertProduct(Product product);
@@ -35,7 +35,7 @@ public interface ProductDao {
     Product queryProductById(long productId);
 
     /**
-     * 更新商品的信息
+     * 更新商品的信息product
      * @param product
      * @return
      */

@@ -38,9 +38,10 @@ public class ShopLoginInterceptor extends HandlerInterceptorAdapter {
         PrintWriter writer = response.getWriter();
         writer.println("<html>");
         writer.println("<script>");
-        writer.println("window.open('"+request.getContextPath()+"/local/login?usertype=2','_self')");
+        writer.println("window.open('"+request.getContextPath()+"/local/login)");
         writer.println("</script>");
         writer.println("</html>");
         return false;
     }
+
 }

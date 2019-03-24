@@ -33,6 +33,10 @@ public class AreaController {
     @Autowired
     private AreaService areaService;
 
+    /**
+     * 获取区域信息列表
+     * @return
+     */
     @RequestMapping(value = "/listarea", method = RequestMethod.GET)
     @ResponseBody
     private Map<String, Object> listArea() {

@@ -48,7 +48,7 @@ $(function () {
                     }else if(usertype == 2){
                         window.location.href="/shopadmin/shoplist";
                     }else if(usertype == 3){
-                        window.location.href="/superadmin/head";
+                        window.location.href="/superadmin/topadmin";
                     }
                 }else {
                     $.toast("登录失败！"+data.errMsg);

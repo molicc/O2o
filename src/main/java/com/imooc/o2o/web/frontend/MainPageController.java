@@ -36,7 +36,7 @@ public class MainPageController {
     /**
      * 初始化前端展示系统的主页信息，包括获取一级店铺类别列表以及头条列表
      *
-     * @return
+     * @return modelMap
      */
     @ResponseBody
     @RequestMapping(value = "/listmainpageinfo", method = RequestMethod.GET)
@@ -52,6 +52,7 @@ public class MainPageController {
             return modelMap;
         }
         try {
+            //获取头条
             HeadLine headLine = new HeadLine();
             headLine.setEnableStatus(1);
             List<HeadLine> headLineList = headLineService.getHeadLineList(headLine);

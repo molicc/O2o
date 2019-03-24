@@ -55,7 +55,7 @@ public class ImageUtil {
                 try {
                     //添加水印后的图片对原图片进行覆盖
                     Thumbnails.of(image).size(337, 640).watermark(Positions.BOTTOM_RIGHT,
-                            ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\pictures\\waterMark.jpg")),
+                            ImageIO.read(new File(PathUtil.getImgBasePath()+"/upload/watermark.jpg")),
                             0.25f).outputQuality(0.8f)
                             .toFile(dest);
                 } catch (IOException e) {
@@ -65,7 +65,7 @@ public class ImageUtil {
             case 1:
                 try {
                     Thumbnails.of(image).size(200, 200).watermark(Positions.BOTTOM_RIGHT,
-                            ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\pictures\\waterMark.jpg")),
+                            ImageIO.read(new File(PathUtil.getImgBasePath()+"/upload/watermark.jpg")),
                             0.25f).outputQuality(0.9f)
                             .toFile(dest);
                 } catch (IOException e) {

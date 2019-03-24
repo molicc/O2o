@@ -182,6 +182,11 @@ public class LocalAuthController {
         return modelMap;
     }
 
+    /**
+     * 注册用户
+     * @param request
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/registerNew", method = RequestMethod.POST)
     private Map<String, Object> register(HttpServletRequest request) {

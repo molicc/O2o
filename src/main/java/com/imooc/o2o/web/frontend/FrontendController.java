@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @autor Administrator
  * @date 2018/12/17 20:53
  **/
+
 @Controller
 @RequestMapping("/frontend")
 public class FrontendController {

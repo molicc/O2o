@@ -51,9 +51,9 @@ public class AreaServiceImpl implements AreaService {
         if (!jedisUtilKeys.exists(key)) {
             //如果Redis中没有该key
 
+
             //从数据库查出来
             areaList = areaDao.queryArea();
-
             try {
                 //转换成String
                 jsonString = mapper.writeValueAsString(areaList);

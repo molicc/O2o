@@ -36,13 +36,18 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) {
+        //根据前端分页参数获取rowIndex,把前端的页数转换为在数据库里面取数据的行数，从下标为0开始
+        //pageIndex > 0 ? (pageIndex - 1) * pageSize : 0
         int rowIndex = PageCalculator.calculateRowIndex(pageIndex,pageSize);
+        //调用dao层接口，获取数据
         List<Shop> shopList = shopDao.queryShopList(shopCondition, rowIndex, pageSize);
         int count = shopDao.queryShopCount(shopCondition);
         ShopExecution shopExecution = new ShopExecution();
         if (shopList!=null){
             shopExecution.setCount(count);
             shopExecution.setShopList(shopList);
+            //设置成功状态
+            shopExecution.setState(ShopStateEnum.SUCCESS.getState());
         }else {
             shopExecution.setState(ShopStateEnum.INNER_ERROR.getState());
         }

@@ -15,8 +15,7 @@ public interface AdminShopDao {
     // 店铺名（shop_name）、店铺说明(shop_deac)、phone、
     //priority、create_time、last_edit_time、advice、enable_status
     //todo 设置查询返回实体
-    List<Shop> queryShopListByState(@Param("status")long status,
-                                    @Param("rowIndex")int rowIndex,
+    List<Shop> queryShopListByState(@Param("rowIndex")int rowIndex,
                                     @Param("pageSize")int pageSize);
-    Integer queryCountByState(@Param("status")long status);
+    Integer queryCountByState();
 }

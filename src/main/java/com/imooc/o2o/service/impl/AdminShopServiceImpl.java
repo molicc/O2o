@@ -22,21 +22,20 @@ public class AdminShopServiceImpl implements AdminShopService {
 
     /**
      * create by ft on 2019-03-22
-     * 根据商店的状态返回不同的商店列表
-     * @param status
+     * 返回所有状态的的商店列表
      * @param pageIndex
      * @param pageSize
      * @return
      */
     @Override
-    public ShopExecution getStatusShopList(long status, int pageIndex, int pageSize) {
+    public ShopExecution getStatusShopList(int pageIndex, int pageSize) {
         //根据pageSize计算出rowIndex
         int rowIndex = PageCalculator.calculateRowIndex(pageIndex, pageSize);
         //采用数组形式存储列表，因为主要是做查询操作，而不作修改
         List<Shop> statusShopList = new ArrayList<Shop>() ;
-        statusShopList = adminShopDao.queryShopListByState(status,rowIndex,pageSize);
+        statusShopList = adminShopDao.queryShopListByState(rowIndex,pageSize);
         //获取店铺总数
-        int count = adminShopDao.queryCountByState(status);
+        int count = adminShopDao.queryCountByState();
         ShopExecution shopExecution = new ShopExecution() ;
         if(statusShopList != null){
             //不为空，则取出了数据，返回给controller

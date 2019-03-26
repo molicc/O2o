@@ -7,15 +7,18 @@
         <id column="shop_id" property="shopId"/>
         <result column="shop_name" property="shopName"/>
         <result column="shop_desc" property="shopDesc"/>
+        <result column="shop_addr" property="shopAddr"/>
         <result column="phone" property="phone"/>
+        <result column="shop_img" property="shopImg"/>
         <result column="priority" property="priority"/>
         <result column="create_time" property="createTime"/>
         <result column="last_edit_time" property="lastEditTime"/>
         <result column="enable_status" property="enableStatus"/>
         <result column="advice" property="advice"/>
-        <association property="owner" column="user_id" javaType="PersonInfo">
-            <id column="user_id" property="userId"/>
-            <result column="user_name" property="name"/>
+        <!--在tb_shop里面的owner对应了person_info里面的user_id，因该做相应的配置-->
+        <association property="owner" column="owner_id" javaType="PersonInfo">
+            <id column="owner_id" property="userId"/>
+            <result column="name" property="name"/>
         </association>
         <association property="shopCategory" column="shop_category_id" javaType="ShopCategory">
             <id column="shop_category_id" property="shopCategoryId"/>
@@ -28,10 +31,23 @@
     </resultMap>
     <!--分页参数从0开始，第一行数据的下标为0，rowIndex为0才是取第一行数据-->
     <select id="queryShopListByState" resultMap="shopMap">
-        select shop_id,shop_name,ts.owner_id,tpi.name,ts.area_id,area_name,
-              ts.shop_category_id,shop_category_name,
-              shop_desc,shop_addr,phone,ts.priority,ts.create_time,
-              ts.last_edit_time,ts.enable_status,advice
+        select shop_id,
+                shop_name,
+                ts.owner_id,
+                tpi.name,
+                ts.area_id,
+                area_name,
+                ts.shop_category_id,
+                shop_category_name,
+                shop_desc,
+                shop_addr,
+                phone,
+                ts.shop_img,
+                ts.priority,
+                ts.create_time,
+                ts.last_edit_time,
+                ts.enable_status,
+                advice
         from tb_shop as ts
         inner join tb_person_info as tpi
         on tpi.user_id=ts.owner_id
@@ -39,7 +55,6 @@
         on ta.area_id=ts.area_id
         inner join tb_shop_category as tsc
         on tsc.shop_category_id=ts.shop_category_id
-        WHERE ts.enable_status=#{status}
         order by ts.priority DESC
         limit #{rowIndex},#{pageSize}
     </select>
@@ -52,6 +67,5 @@
         on ta.area_id=ts.area_id
         inner join tb_shop_category as tsc
         on tsc.shop_category_id=ts.shop_category_id
-        WHERE ts.enable_status=#{status}
     </select>
 </mapper>

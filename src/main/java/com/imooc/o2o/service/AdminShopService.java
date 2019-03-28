@@ -11,4 +11,13 @@ public interface AdminShopService {
      * @return
      */
     ShopExecution getStatusShopList(int pageIndex, int pageSize);
+
+    /**
+     * 修改店铺的审核状态
+     * @param enableStatus
+     * @param shopId
+     * @return
+     */
+    Boolean modifyShopState(int enableStatus,long shopId);
+
 }

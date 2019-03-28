@@ -48,4 +48,17 @@ public class AdminShopServiceImpl implements AdminShopService {
         }
         return shopExecution;
     }
+
+    @Override
+    public Boolean modifyShopState(int enableStatus, long shopId) {
+        if(shopId>0&&(enableStatus==0|enableStatus==-1|enableStatus==1)){
+            int effectNum = adminShopDao.modifyShopState(enableStatus,shopId);
+            if(effectNum>0){
+                return true ;
+            }else {
+                return false ;
+            }
+        }
+        return false ;
+    }
 }

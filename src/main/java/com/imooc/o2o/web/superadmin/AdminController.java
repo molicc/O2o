@@ -17,4 +17,10 @@ public class AdminController {
      */
     @RequestMapping(value = "/topadmin")
     private String topAdmin(){ return "/superadmin/topadmin"; }
+    /**
+     * 转发到店铺审核详情页
+     * @return
+     */
+    @RequestMapping(value = "/allshoplist")
+    private String statusShopList(){ return "/superadmin/allshoplist";}
 }

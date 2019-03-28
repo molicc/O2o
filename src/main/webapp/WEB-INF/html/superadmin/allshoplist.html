@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>O2oSchool</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+        <header class="bar bar-nav">
+            <h1 class='title'>所有商铺</h1>
+        </header>
+        <div class="content infinite-scroll infinite-scroll-bottom"
+                     data-distance="100">
+            <!--店铺展示区-->
+                <!--列出所有商店信息,可以选择上架或者下架商店-->
+                <!--这是实例展示区,把每一个shop包装成一个卡片-->
+                <!--<div class="card">
+                    <div class="card-header" shop-id="25">店铺ID:<strong>25</strong> 店铺名称:<strong>嘻嘻网咖</strong></div>
+                    <div class="card-content">
+                      <div class="list-block media-list">
+                        <ul>
+                          <li class="item-content">
+                            <div class="item-media">
+                              <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="44">
+                            </div>
+                            <div class="item-inner">
+                              <div class="item-title-row">
+                                <div class="item-title">店主:冯涛</div>
+                              </div>
+                              <div class="item-subtitle">联系电话:<strong>18228980523</strong></div>
+                              <div class="item-subtitle">所属区域:<strong>南街</strong></div>
+                              <div class="item-subtitle">店铺类别:<strong>电子竞技</strong></div>
+                              <div class="item-subtitle" style="font-size:10px">desc介绍:<strong>dasdasd</strong></div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <span>create time:2015/01/15</span>
+                      <div >
+                        <a href="#" id="change-status" class="button button-fill button-submit">审核店铺</a>
+                      </div>
+                    </div>
+                </div>-->
+                <!--由js代码动态拼接html-->
+            <div class="shop-warp">
+
+            </div>
+            <!--加载提示符-->
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+            <div class="row">
+                <div class="col-50">
+                    <a href="javascript:history.go(-1)" class="button button-big button-fill button-back">返回</a>
+                </div>
+                <div class="col-50">
+                    <a href="/local/login" id="" class="button button-big button-fill button-danger">退出系统</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+<script type="text/javascript" src="/resources/js/common/common.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/resources/js/superadmin/allshoplist.js" charset="UTF-8"></script>
+
+</body>
+</html>

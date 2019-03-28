@@ -55,7 +55,7 @@
         on ta.area_id=ts.area_id
         inner join tb_shop_category as tsc
         on tsc.shop_category_id=ts.shop_category_id
-        order by ts.priority DESC
+        order by ts.shop_id DESC
         limit #{rowIndex},#{pageSize}
     </select>
     <select id="queryCountByState" resultType="java.lang.Integer">
@@ -68,4 +68,9 @@
         inner join tb_shop_category as tsc
         on tsc.shop_category_id=ts.shop_category_id
     </select>
+    <update id="modifyShopState" >
+        update tb_shop
+        set enable_status=#{enableStatus}
+        where shop_id=#{shopId}
+    </update>
 </mapper>

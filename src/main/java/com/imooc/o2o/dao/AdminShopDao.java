@@ -18,4 +18,7 @@ public interface AdminShopDao {
     List<Shop> queryShopListByState(@Param("rowIndex")int rowIndex,
                                     @Param("pageSize")int pageSize);
     Integer queryCountByState();
+    //更具状态和店铺shop-id修改店铺的状态
+    int modifyShopState(@Param("enableStatus")int enableStatus,
+                        @Param("shopId")long shopId);
 }

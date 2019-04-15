@@ -5,6 +5,7 @@ package com.imooc.o2o.dao;/**
  */
 
 import com.imooc.o2o.entity.Area;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +23,19 @@ public interface AreaDao {
      */
     List<Area> queryArea();
 
+    /**
+     * 修改区域名称
+     * @param area
+     * @return
+     */
+    int modifyArea(@Param("area")Area area);
+
+    /**
+     * 插入数据
+     * @param area
+     * @return
+     */
+    int insertArea(@Param("area")Area area);
+
+    Area queryAreaById(@Param("areaId")long areaId);
 }

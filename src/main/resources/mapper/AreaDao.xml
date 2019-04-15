@@ -8,5 +8,27 @@
         from tb_area
         order by priority desc;
     </select>
+    <select id="queryAreaById" resultType="com.imooc.o2o.entity.Area">
+        select area_id,area_name,priority,create_time,last_edit_time
+        from tb_area
+        where area_id=#{areaId}
+    </select>
+    <update id="modifyArea">
+        update tb_area
+        <set>
+            <if test="area.areaName!=null">area_name = #{area.areaName},</if>
+            <if test="area.priority!=null">priority = #{area.priority},</if>
+            <if test="area.lastEditTime!=null">last_edit_time = #{area.lastEditTime}</if>
+        </set>
+        where area_id = #{area.areaId}
+    </update>
 
+    <insert id="insertArea" >
+        insert into
+        tb_area(area_name,priority,create_time,last_edit_time)
+        values (#{area.areaName},
+                #{area.priority},
+                #{area.createTime},
+                #{area.lastEditTime})
+    </insert>
 </mapper>

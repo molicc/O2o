@@ -23,4 +23,11 @@ public class AdminController {
      */
     @RequestMapping(value = "/allshoplist")
     private String statusShopList(){ return "/superadmin/allshoplist";}
+
+    /**
+     * 装啊到区域处理页面
+     * @return
+     */
+    @RequestMapping(value = "/arealist")
+    private String areaList(){ return "/superadmin/arealist";}
 }

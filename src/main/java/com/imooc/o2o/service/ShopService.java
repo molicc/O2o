@@ -26,7 +26,7 @@ public interface ShopService {
      * @param pageSize
      * @return 返回count和list
      */
-    public ShopExecution getShopList(Shop shopCondition,int pageIndex,int pageSize);
+     ShopExecution getShopList(Shop shopCondition,int pageIndex,int pageSize);
     /**
      * 注册店铺
      * @param shop

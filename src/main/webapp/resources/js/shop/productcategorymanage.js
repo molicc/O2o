@@ -56,10 +56,11 @@ $(function () {
             success:function (data) {
                 if (data.success==true){
                     $.toast("提交成功");
+                    //提交成功，才进行html赋值
+                    getList();
                 }else {
                     $.toast(data.errMsg);
                 }
-                getList();
             }
         })
     });

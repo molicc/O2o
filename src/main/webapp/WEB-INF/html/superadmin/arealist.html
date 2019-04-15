@@ -12,39 +12,31 @@
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
 <body>
     <header class="bar bar-nav">
-     <h1 class="title">管理员系统</h1>
+     <h1 class="title">区域信息维护</h1>
     </header>
     <div class="content">
-      <!--商店审核信息-->
-      <div class="content-block-title">店铺管理:商店审核,处理商店审核相关</div>
-      <div class="list-block inset">
-        <ul>
-          <li><a href="javascript:location.href='/superadmin/allshoplist'" class="item-link list-button" id="put-shop-list">店铺管理</a></li>
-        </ul>
+      <!--区域信息管理类容区域-->
+      <div class="list-block inset" >
+              <div class="row no-gutter" style="font-size: 14px">
+                  <div class="col-20">区域名称</div>
+                  <div class="col-15">优先级</div>
+                  <div class="col-40">上次修改</div>
+                  <div class="col-15">操作</div>
+                  <div class="col-10">提交</div>
+              </div><hr/>
+              <!--动态拼接-->
+              <div class="row area-wrap no-gutter">
+              </div>
       </div>
-      <!--类别管理-->
-      <div class="content-block-title">类别管理:增加和修改店铺类别</div>
-      <div class="list-block inset">
-          <ul>
-                <li><a href="#" class="item-link list-button" id="shop-category'-list">商店类别管理</a></li>
-          </ul>
-      </div>
-      <!--区域信息管理-->
-      <div class="content-block-title">区域信息列表管理:维护区域信息</div>
-      <div class="list-block inset">
-          <ul>
-              <li><a href="javascript:location.href='/superadmin/arealist'" class="item-link list-button" id="area-list">区域管理</a></li>
-          </ul>
-      </div>
-      <!--区域信息管理-->
-            <div class="content-block-title">账户管理:审核账户</div>
-            <div class="list-block inset">
-                <ul>
-                    <li><a href="#" class="item-link list-button" id="area-list">账户管理</a></li>
-                </ul>
-            </div>
+      <!--底部按钮-->
       <div class="row">
-          <div class="col-100">
+          <div class="col-33">
+              <a href="javascript:history.go(-1)" class="button button-big button-fill button-back">返回</a>
+          </div>
+          <div class="col-33">
+              <a href="#" id="add-area" class="button button-big button-fill button-success">新增区域</a>
+          </div>
+          <div class="col-33">
               <a href="/local/login" id="" class="button button-big button-fill button-danger">退出系统</a>
           </div>
       </div>
@@ -57,6 +49,7 @@
 
     <script type="text/javascript" src="/resources/js/common/common.js" charset="UTF-8"></script>
     <script type="text/javascript" src="/resources/js/local/logout.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/resources/js/superadmin/arealist.js" charset="UTF-8"></script>
 
 </body>
 </html>

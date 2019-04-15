@@ -91,7 +91,6 @@ $(function () {
     }
     //操作店铺
     $(document).on("click","#change-status", function (e) {
-        //todo:为用户店铺输入建议？
         // var advice = oninput;
         var shopId = $(this).attr("shop-id");
         var modifyUrl = "/superadmin/modifyshopstate";
@@ -111,9 +110,9 @@ $(function () {
                         type:'GET',
                         success:function (data) {
                             if(data.success){
+                                $.toast("审核结果提交成功");
                                 var str = '<strong id="change-status'+shopId+'">'+getStatus(1)+'</strong>';
                                 $('#change-status'+shopId).html(str);
-                                $.toast("审核结果提交成功");
                             }else {
                                 $.toast(data.errMsg);
                             }

@@ -62,9 +62,9 @@ public class AreaController {
             modelmap.put("errMsg", e.toString());
         }
         long endTime = System.currentTimeMillis();
-        logger.error("test error!");
-        logger.debug("costTime:[{}ms]",endTime-startTime);
-        logger.info("-------end-------");
+//        logger.error("test error!");
+//        logger.debug("costTime:[{}ms]",endTime-startTime);
+//        logger.info("-------end-------");
 
         return modelmap;
     }
@@ -77,7 +77,7 @@ public class AreaController {
         String areaName = HttpServletRequestUtil.getString(request,"areaName");
         int priority = Integer.parseInt(request.getParameter("priority"));
         int areaId = Integer.valueOf(request.getParameter("areaId"));
-        Area area = null;
+        Area area = new Area();
         //araId不为空，则获取areaId
         if(areaId>0){
             area.setAreaId(areaId);

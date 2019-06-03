@@ -47,6 +47,7 @@
 		l.user_name =#{userName}
 		AND
 		l.password = #{password}
+
     </select>
     <select id="queryLocalByUserId" resultMap="localAuthResultMap"
             parameterType="long">

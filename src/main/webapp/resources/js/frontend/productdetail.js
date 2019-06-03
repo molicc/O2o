@@ -21,8 +21,8 @@ $(function () {
                         imgListHtml += '<div> <img src="' + item.imgAddr + '"/></div>';
                     });
                     // 生成购买商品的二维码供商家扫描
-                    imgListHtml += '<div> <img src="/myo2o/frontend/generateqrcode4product?productId='
-                        + product.productId + '"/></div>';
+                    // imgListHtml += '<div> <img src="/myo2o/frontend/generateqrcode4product?productId='
+                    //     + product.productId + '"/></div>';
                     $('#imgList').html(imgListHtml);
                 }
             });

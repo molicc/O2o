@@ -3,7 +3,7 @@ $(function () {
     //分页允许返回的最大条数，超过则禁止访问后台
     var maxItems = 20
     //一页允许返回的最大条数
-    var pageSize = 3
+    var pageSize = 5
     //获取店铺列表的URL
     var listUrl = "/frontend/listshops"
     //获取店铺类别列表以及区域列表的URL
@@ -64,7 +64,7 @@ $(function () {
     function addItems(pageSize, pageIndex) {
         //拼接出查询的URL，赋空值默认就去掉这个条件的限制，有值就代表这个条件去查询
         var url = listUrl + '?' + 'pageIndex=' + pageIndex + '&pageSize=' + pageSize + '&parentId=' + parentId + '&areaId=' + areaId + '&shopCategoryId='
-            + shopCategoryId + '&shopName=' + shopName
+            + parentId + '&shopName=' + shopName
         //设定加载符，若还在后台取数据则不能再次访问后台，避免多次重复加载
         loading = true
         //访问后台获取相应查询条件下的店铺列表

@@ -200,7 +200,7 @@ public class LocalAuthServiceImpl implements LocalAuthService {
 
     private void addUserImg(PersonInfo personInfo, ImageHolder imageHolder) {
         String userImgPath = PathUtil.getUserImgPath(personInfo.getUserId());
-        ImageUtil.generateImage(imageHolder, userImgPath, ImageCategoryEnum.USER_IMG);
+        userImgPath = ImageUtil.generateImage(imageHolder, userImgPath, ImageCategoryEnum.USER_IMG);
         personInfo.setProfileImg(userImgPath);
     }
 

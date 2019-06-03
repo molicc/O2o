@@ -45,7 +45,8 @@ $(function () {
     })
     $(".row").on("click",".shop-classify",function (e) {
         var shopCategoryId =e.currentTarget.dataset.category;
-        var newUrl ="/frontend/shoplist?parentId="+shopCategoryId
+        //var newUrl ="/frontend/shoplist?parentId="+shopCategoryId;
+        var newUrl ="/frontend/shoplist";
         window.location.href=newUrl
     })
 })

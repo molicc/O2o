@@ -7,6 +7,8 @@ package com.imooc.o2o.dao;
 
 import com.imooc.o2o.entity.PersonInfo;
 
+import java.util.List;
+
 /**
  *
  *@className PersonInfoDao
@@ -28,4 +30,10 @@ public interface PersonInfoDao {
        * @return
        */
       int updatePersonInfo(PersonInfo personInfo);
+
+      /**
+       * 查询所有用户类别为商家和用户的信息
+       * @return
+       */
+      List<PersonInfo> queryPersonInfo();
 }

@@ -113,7 +113,7 @@ $(function () {
 
     $('.list-div').on('click', '.card', function (e) {
         var productId = e.currentTarget.dataset.productId;
-        window.location.href = '/myo2o/frontend/productdetail?productId='
+        window.location.href = '/frontend/productdetail?productId='
             + productId;
     });
 

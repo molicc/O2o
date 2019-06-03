@@ -25,9 +25,23 @@ public class AdminController {
     private String statusShopList(){ return "/superadmin/allshoplist";}
 
     /**
-     * 装啊到区域处理页面
+     * 转发到区域处理页面
      * @return
      */
     @RequestMapping(value = "/arealist")
     private String areaList(){ return "/superadmin/arealist";}
+
+    /**
+     * 转发到用户审核页面
+     * @return
+     */
+    @RequestMapping(value = "/checkusers")
+    private String checkUsers(){ return "/superadmin/checkusers";}
+
+    /**
+     * 转发到商品类别信息维护页
+     * @return
+     */
+    @RequestMapping(value = "/categorymaintain")
+    private String categoryMaintain(){ return "/superadmin/categorymaintain";}
 }

@@ -22,4 +22,9 @@
         </set>
         where user_id=#{userId}
     </update>
+    <select id="queryPersonInfo" resultType="PersonInfo">
+        SELECT *
+        FROM tb_person_info
+        where user_type!=3 ORDER BY enable_status desc ;
+    </select>
 </mapper>

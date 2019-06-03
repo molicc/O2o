@@ -152,11 +152,14 @@ public class LocalAuthController {
         String password = HttpServletRequestUtil.getString(request, "password");
         if (userName != null && password != null) {
             LocalAuth localAuthByUserNameAndPwd = localAuthService.getLocalAuthByUserNameAndPwd(userName, password);
-            if (localAuthByUserNameAndPwd != null) {
+            if (localAuthByUserNameAndPwd != null&&localAuthByUserNameAndPwd.getPersonInfo().getEnableStatus()==1) {
                 modelMap.put("success", true);
                 modelMap.put("userType", localAuthByUserNameAndPwd.getPersonInfo().getUserType());
                 request.getSession().setAttribute("user", localAuthByUserNameAndPwd.getPersonInfo());
-            } else {
+            } else if(localAuthByUserNameAndPwd != null&&localAuthByUserNameAndPwd.getPersonInfo().getEnableStatus()==0){
+                modelMap.put("success", false);
+                modelMap.put("errMsg", "该用户禁止使用本系统");
+            }else {
                 modelMap.put("success", false);
                 modelMap.put("errMsg", "用户名或密码错误");
             }

@@ -45,7 +45,7 @@ $(function () {
                                 '</div>'+
                             '</div>'+
                             '<div class="card-footer">'+
-                                '<span>'+"注册时间:"+new Date(value.createTime).Format("yyyy-MM-dd")+'</span>'+
+                                '<div>'+"注册时间:"+new Date(value.createTime).Format("yyyy-MM-dd")+'</div>'+
                                 '<div >'+
                                     '<a href="#" id="change-status" class="button button-fill button-submit " shop-id="'+
                                     value.shopId+'">'+"审核店铺"+'</a>'+
@@ -58,7 +58,7 @@ $(function () {
             //如果取出的数据没有pageSize，则去除加载符
             if(pageSize*pageNum >= maxItems){
                 // 加载完毕，则注销无限加载事件，以防不必要的加载
-                $.detachInfiniteScroll($('.infinite-scroll'));
+                //$.detachInfiniteScroll($('.infinite-scroll'));
                 // 删除加载提示符
                 $('.infinite-scroll-preloader').remove();
                 return ;
@@ -72,7 +72,7 @@ $(function () {
     getItems(pageNum,pageSize);
 
     $(document).on('infinite', '.infinite-scroll', function () {
-        alert("无限加载");
+        //alert("无限加载");
         if (loading)
             return;
         //否则继续加载
@@ -111,8 +111,8 @@ $(function () {
                         success:function (data) {
                             if(data.success){
                                 $.toast("审核结果提交成功");
-                                var str = '<strong id="change-status'+shopId+'">'+getStatus(1)+'</strong>';
-                                $('#change-status'+shopId).html(str);
+                                var str = '<strong id="change-status'+shopId+'">'+getStatus(enableStatus)+'</strong>';
+                                this.$('#change-status'+shopId).html(str);
                             }else {
                                 $.toast(data.errMsg);
                             }
@@ -132,7 +132,7 @@ $(function () {
                         type:'GET',
                         success:function (data) {
                             if(data.success){
-                                var str = '<strong id="change-status'+shopId+'">'+getStatus(-1)+'</strong>';
+                                var str = '<strong id="change-status'+shopId+'">'+getStatus(enableStatus)+'</strong>';
                                 this.$('#change-status'+shopId).html(str);//要刷新的div
                                 //$(this).attr(getStatus(-1));
                                 $.toast("审核结果提交成功");

@@ -134,7 +134,14 @@ public class ProductServiceImpl implements ProductService {
     public ProductExecution getProductList(Product productCondition, int pageIndex, int pageSize) {
         int rowIndex = PageCalculator.calculateRowIndex(pageIndex, pageSize);
         List<Product> products = productDao.queryProductList(productCondition, rowIndex, pageSize);
-        int count = productDao.queryProductCount(productCondition);
+        //todo :找到这个代码的异常之处
+        int count = 10 ;
+        try{
+         count = productDao.queryProductCount(productCondition);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
         ProductExecution productExecution = new ProductExecution();
         productExecution.setProductList(products);
         productExecution.setCount(count);

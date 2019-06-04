@@ -121,9 +121,8 @@
             <if test="productCondition.shop!=null and productCondition.shop.shopId!=null">
                 and shop_id =#{productCondition.shop.shopId}
             </if>
-            <if
-                    test="productCondition.productCategory!=null and productCondition.productCategory.productCategoryId!=null">
-                and product_category_id =#{productCondition.productCondition.productCategoryId}
+            <if test="productCondition.productCategory!=null and productCondition.productCategory.productCategoryId!=null">
+                and product_category_id =#{productCondition.productCategory.productCategoryId}
             </if>
             <if test="productCondition.productName!=null">
                 and product_name like '%${productCondition.productName}%'
@@ -145,9 +144,8 @@
             <if test="productCondition.shop!=null and productCondition.shop.shopId!=null">
                 and shop_id =#{productCondition.shop.shopId}
             </if>
-            <if
-                    test="productCondition.productCategory!=null and productCondition.productCategory.productCategoryId!=null">
-                and product_category_id =#{productCondition.productCondition.productCategoryId}
+            <if test="productCondition.productCategory!=null and productCondition.productCategory.productCategoryId!=null">
+                and product_category_id =#{productCondition.productCategory.productCategoryId}
             </if>
             <if test="productCondition.productName!=null">
                 and product_name like '%${productCondition.productName}%'

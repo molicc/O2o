@@ -94,7 +94,9 @@
         tb_product_img.img_desc,
         tb_product_img.priority,
         tb_product_img.create_time
-        from tb_product,tb_product_img
+        from tb_product
+        LEFT JOIN tb_product_img
+		ON tb_product_img.product_id=tb_product.product_id
         where
         tb_product.product_id=#{productId}
         order by
